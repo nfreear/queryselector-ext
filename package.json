@@ -10,7 +10,6 @@
     "grunt-cli": "^1.2.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1",
-    "grunt-nice-package": "^0.10.2",
     "jquery": "^1.11",
     "jsdom": "^8.3",
     "mocha": "^2.4.5"

@@ -36,15 +36,19 @@
 
     var QSE = function querySelectorExt(selector, debug) {
         var $ = jQuery
-          , tokens = selector.split(/\:/)
+          , tokens = selector && selector.split(/\:/)
           , next_sel ///= tokens.shift()
-          , length = tokens.length
+          , length = tokens && tokens.length
           , idx = 0
           , next
           , matches
     			, done_sel = false
           //, $progress
           , $result;
+
+        if (! selector) {
+            return null;
+        }
 
         if (selector.match(/^--\w+/)) {
             return "Hi from 'querySelectorExt'.";

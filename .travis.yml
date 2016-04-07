@@ -1,13 +1,12 @@
 language: node_js
 node_js:
-  - "0.12"
+  - "4"  # 'jsdom 7.x onward only works on Node.js 4 or newer'
 
 git:
   depth: 5
 
 install:
   - npm install -g npm
-  #- npm install -g grunt-cli
   - npm install
 
 script:

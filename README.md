@@ -8,10 +8,10 @@ Add a minimalist function-like syntax. For example:
   querySelectorExt(' #id123:closest( tr ):find( th ) ');
 ```
 
-Supported _functions_:
+Supported functions:
 
-* [`closest(..)`][]
-* [`find(..)`][]
+* [`:closest(..)`][closest]
+* [`:find(..)`][find]
 
 Use case: ...
 
@@ -22,6 +22,6 @@ License: [MIT][]
 
 [qs]: https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector
     "element.querySelector() on Mozilla MDN"
-[`closest()`]: https://api.jquery.com/closest/ ".closest() in jQuery"
-[`find()`]: https://api.jquery.com/find/ ".find() in jQuery"
+[closest]: https://api.jquery.com/closest/ "Based on jQuery's .closest()"
+[find]:    https://api.jquery.com/find/ "Based on jQuery's .find()"
 [MIT]: http://nfreear.mit-license.org/ "MIT License"
