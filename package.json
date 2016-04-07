@@ -1,6 +1,6 @@
 {
   "name": "queryselector-ext",
-  "description": "Extend the selector syntax for 'querySelector' - add a minimal function-like syntax, e.g. ` qse('#id123:closest( tr )') `",
+  "description": "Extend the selector syntax for 'querySelector' — add a minimal function-like syntax, e.g. ` qse('#id123:closest( tr )') `",
   "license": "MIT",
   "author": " Nick Freear",
   "dependencies": {},

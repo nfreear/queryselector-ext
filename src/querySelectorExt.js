@@ -59,11 +59,11 @@
 
         next_sel = tokens.shift();
 
-        if (selector.match(/.+\:(closest|find)\([^\:]+\)(\:|$)/)) {
+        if (selector.match(/.+\:(closest|find)\([^\:]*\)(\:|$)/)) {
             // The 'extended' route.
             for (idx = 0; idx < length - 1; idx++) {
                 next = tokens.shift();
-                matches = next.match(/^(closest|find)\(([^\)]+)\)$/);
+                matches = next.match(/^(closest|find)\(([^\)]*)\)$/);
                 if (matches) {
                     // Stop!
     								if (! done_sel) {
