@@ -8,9 +8,22 @@ git:
 install:
   - npm install -g npm
   - npm install
+  - npm run install-global
 
 script:
+  - pjv -s npm # Valid package.json
   - grunt
   - mocha
+  # Test coverage.
+  - npm run test-cov
+  - npm run codeclimate
+
+after_script:
+  #- cat test/coverage/lcov.info
+
+env:
+  # Test coverage configuration.
+  # CODECLIMATE_REPO_TOKEN=b1ca67....18 codeclimate-test-reporter < lcov.info
+  - CODECLIMATE_REPO_TOKEN=b1ca6785eeb21f0ca9bff035af6e70d30b8e6c9cdbf809638f4ab3ced98e9718
 
 #End.

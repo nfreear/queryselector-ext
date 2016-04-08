@@ -2,17 +2,30 @@
   "name": "queryselector-ext",
   "description": "Extend the selector syntax for 'querySelector' — add a minimal function-like syntax, e.g. ` qse('#id123:closest( tr )') `",
   "license": "MIT",
-  "author": " Nick Freear",
+  "version": "1.0.1+beta",
+  "author": "Nick Freear / @nfreear",
   "dependencies": {},
   "devDependencies": {
     "chai": "^3.5.0",
+    "codeclimate-test-reporter": "^0.3.1",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1",
+    "istanbul": "^0.4.3",
     "jquery": "^1.11",
     "jsdom": "^8.3",
     "mocha": "^2.4.5"
   },
-  "main": "src/querySelectorExt.js"
+  "main": "src/querySelectorExt.js",
+  "scripts": {
+    "codeclimate-env": "# Manual step!\n# export CODECLIMATE_REPO_TOKEN=b1ca6785eeb21f0ca9bff035af6e70d30b8e6c9cdbf809638f4ab3ced98e9718",
+    "codeclimate": "codeclimate-test-reporter < test/coverage/lcov.info",
+    "install-global": "npm install -g package-json-validator -g codeclimate-test-reporter -g istanbul",
+    "test-cov": "cd test; istanbul cover ../node_modules/.bin/_mocha -- -u exports -R spec *.js"
+  },
+  "~~": [
+    "https://coderwall.com/p/x6jfwg/running-istanbul-code-coverage-with-mocha",
+    "https://github.com/gotwarlost/istanbul/issues/262#!-No-coverage-information-was-collected-"
+  ]
 }

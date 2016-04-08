@@ -1,7 +1,9 @@
 
 node_modules
 dist
+test/coverage
 *BAK*
+*.log
 *.min.js
 *.map
 

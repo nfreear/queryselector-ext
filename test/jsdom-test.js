@@ -81,7 +81,6 @@ describe('querySelectorExt', function () {
         expect($label[ 0 ].textContent).to.equal('Staff ID');
         expect($label.text()).to.equal('Staff ID');
 
-        console.log('QSE:   ', qse('--HI'));
         console.log('$label:', $label[ 0 ]);
 
         done();
