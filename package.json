@@ -22,6 +22,7 @@
     "codeclimate-env": "# Manual step!\n# export CODECLIMATE_REPO_TOKEN=b1ca6785eeb21f0ca9bff035af6e70d30b8e6c9cdbf809638f4ab3ced98e9718",
     "codeclimate": "codeclimate-test-reporter < test/coverage/lcov.info",
     "install-global": "npm install -g package-json-validator -g codeclimate-test-reporter -g istanbul",
+    "test": "mocha",
     "test-cov": "cd test; istanbul cover ../node_modules/.bin/_mocha -- -u exports -R spec *.js"
   },
   "~~": [

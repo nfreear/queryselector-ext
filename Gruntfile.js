@@ -21,13 +21,13 @@ module.exports = function (grunt) {
 			test: {
 				options: {
 					// https://github.com/jshint/jshint/blob/master/src/messages.js#L80
-					'-W027': true,  // Ignore: Unreachable '{a}' after '{b}'.
+					//'-W027': true,  // Ignore: Unreachable '{a}' after '{b}'.
 					'-W097': true,  // Ignore: Use the function form of "use strict".
 					globals: {
 						console: false, __dirname: false, require: false, describe: false, it: false, before: false
 					}
 				},
-				files: { src: 'test/**/*.js' }
+				files: { src: 'test/*.js' }
 			},
 			grunt: 'Gruntfile.js'
 		},

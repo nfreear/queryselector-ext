@@ -11,7 +11,6 @@ var jsdom = require('jsdom')
   , chai = require('chai')
   , expect = chai.expect
   , dir = __dirname
-  , debug = false
   , select_fail_empty  = '[ name = fpsa2 ]:closest()'
   , select_fail_comma  = '[ name = fpsa2 ]:closest( tr ) , .after-a-comma'
   , select_fail_parent = '[ name = fpsa2 ]:parent( opt )'  // Or: ':parent()'
@@ -19,7 +18,7 @@ var jsdom = require('jsdom')
 
 chai.should();
 
-describe('Failures', function () {
+describe('Failure cases:', function () {
   this.timeout(2000);
 
   it('Empty function-selector failure case.', function (done) {
@@ -28,16 +27,16 @@ describe('Failures', function () {
       [ dir + '/../node_modules/jquery/dist/jquery.js',
         dir + '/../src/querySelectorExt.js' ],
       function (err, window) {
-        var qse = window.querySelectorExt;
+        var qse = window.querySelectorExt
+          , empty_fn = function () {
+            qse(select_fail_empty);
+          };
 
         expect(window, 'window').to.be.an('object');
         expect(err, 'err').to.be.a('null');
         expect(qse, 'qse').to.be.a('function');
 
-        var $empty = qse(select_fail_empty, debug ? console.log : null);
-
-        expect($empty, '$empty').to.be.an('object');
-        expect($empty).to.have.lengthOf(0);
+        expect(empty_fn, 'Ex empty').to.throw(/empty function pseudo/);
 
         done();
       }
@@ -51,11 +50,13 @@ describe('Failures', function () {
         dir + '/../src/querySelectorExt.js' ],
       function (err, window) {
         var qse = window.querySelectorExt
-          , $anull = qse();
+          , missing_param_fn = function () {
+            qse();
+          };
 
-        expect(qse, 'qse').to.be.a('function');
+        expect(err, 'err').to.be.a('null');
 
-        expect($anull, '$anull').to.be.a('null');
+        expect(missing_param_fn).to.throw(/missing parameter: selector/);
 
         done();
       }
@@ -63,8 +64,32 @@ describe('Failures', function () {
   });
 
 
-  it('XX  Comma failure case.', function (done) {
-    done(); return;
+  it('Comma failure case.', function (done) {
+
+    jsdom.env(
+      dir + '/form-test.html',
+      [ dir + '/../node_modules/jquery/dist/jquery.js',
+        dir + '/../src/querySelectorExt.js' ],
+      function (err, window) {
+        var qse = window.querySelectorExt
+          , comma_fn = function () {
+            qse(select_fail_comma);
+          };
+
+        expect(window, 'window').to.be.an('object');
+        expect(err, 'err').to.be.a('null');
+        expect(qse, 'qse').to.be.a('function');
+
+        expect(comma_fn).to.be.a('function');
+        expect(comma_fn, 'Ex comma').to.throw('Syntax error, unrecognized expression: unsupported pseudo: closest');
+
+        done();
+      }
+    );
+  });
+
+
+  it('Unrecognised function failure case -- parent()', function (done) {
 
     jsdom.env(
       dir + '/form-test.html',
@@ -73,47 +98,37 @@ describe('Failures', function () {
       function (err, window) {
         var qse = window.querySelectorExt;
 
-        expect(window, 'window').to.be.an('object');
         expect(err, 'err').to.be.a('null');
-        expect(qse, 'qse').to.be.a('function');
 
-        // Uncaught Error: Syntax error, unrecognized expression: unsupported pseudo: closest
-        expect(qse, 'ex').to.throw('Syntax error, unrecognized expression: unsupported pseudo: closest');
-        var $comma = qse(select_fail_comma, debug ? console.log : null);
-
-        console.log("Fails:", $comma);
-
-        expect($comma, '$comma').to.be.an('object');
-
-        // 1 not 2, inspite of the comma.
-        //expect($comma).to.have.lengthOf(1);
-
-        done();
-      }
-    );
-  });
-
-
-  it('XX  Unrecognised function failure case -- parent()', function (done) {
-    done(); return;
-
-    jsdom.env(
-      dir + '/form-test.html',
-      [ dir + '/../node_modules/jquery/dist/jquery.js',
-        dir + '/../src/querySelectorExt.js' ],
-      function (err, window) {
-        var qse = window.querySelectorExt;
-
-        expect(window, 'window').to.be.an('object');
-        expect(err, 'err').to.be.a('null');
-        expect(qse, 'qse').to.be.a('function');
-
-        //expect(qse, 'ex2').to.throw('Cannot read property \'split\' of undefined');
         var $parent = qse(select_fail_parent);
+
+        // 'Error' answer: 0, not 1.
+        expect($parent, 'parent()').to.not.have.lengthOf(1);
+        expect($parent, 'parent()').to.have.lengthOf(0);
+
+        done();
+      }
+    );
+  });
+
+
+  it('Unexpected PSEUDO failure case', function (done) {
+
+    jsdom.env(
+      dir + '/form-test.html',
+      [ dir + '/../node_modules/jquery/dist/jquery.js',
+        dir + '/../src/querySelectorExt.js' ],
+      function (err, window) {
+        var qse = window.querySelectorExt;
+
+        expect(err, 'err').to.be.a('null');
+
         var $pseudo = qse(select_fail_pseudo);
 
-        expect($parent).to.have.lengthOf(0);
-        expect($pseudo).to.have.lengthOf(0);
+        // Error: we want 'TH'; instead we get 'TR'.
+        expect($pseudo).to.have.lengthOf(1);
+        expect($pseudo[ 0 ].tagName).to.not.equal('TH');
+        expect($pseudo[ 0 ].tagName).to.equal('TR');
 
         done();
       }

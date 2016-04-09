@@ -11,9 +11,9 @@ install:
   - npm run install-global
 
 script:
-  - pjv -s npm # Valid package.json
+  - pjv -s npm # Validate package.json
   - grunt
-  - mocha
+  #- mocha
   # Test coverage.
   - npm run test-cov
   - npm run codeclimate

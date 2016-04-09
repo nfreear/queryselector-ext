@@ -18,7 +18,8 @@ Supported functions:
 * [`:closest(..)`][closest]
 * [`:find(..)`][find]
 
-Use case: ...
+
+Use case: primary use-cases are the [accessibility fixes in Accessify Wiki][use].
 
 
 ---
@@ -29,6 +30,7 @@ License: [MIT][] | By: [@nfreear].
     "element.querySelector() on Mozilla MDN"
 [closest]: https://api.jquery.com/closest/ "Based on jQuery's .closest()"
 [find]:    https://api.jquery.com/find/ "Based on jQuery's .find()"
+[use]: http://accessifywiki.github.io/fix/ou-news.html#fixes "Accessibility fixes — Accessify Wiki"
 [@nfreear]: https://twitter.com/@nfreear "made by Nick Freear with ♥"
 [MIT]: http://nfreear.mit-license.org/ "MIT License. © 2016 Nick Freear."
 

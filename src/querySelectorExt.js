@@ -37,17 +37,16 @@
     var QSE = function querySelectorExt(selector, debug) {
         var $ = jQuery
           , tokens = selector && selector.split(/\:/)
-          , next_sel ///= tokens.shift()
+          , next_sel
           , length = tokens && tokens.length
           , idx = 0
           , next
           , matches
     			, done_sel = false
-          //, $progress
           , $result;
 
         if (! selector) {
-            return null;
+            throw Error('Error, missing parameter: selector');
         }
 
         if (selector.match(/^--\w+/)) {
@@ -65,6 +64,9 @@
                 next = tokens.shift();
                 matches = next.match(/^(closest|find)\(([^\)]*)\)$/);
                 if (matches) {
+                    if (! matches[ 2 ]) {
+                        throw Error('Syntax error, empty function pseudo: ' + matches[ 1 ]);
+                    }
                     // Stop!
     								if (! done_sel) {
     									  done_sel = true;
